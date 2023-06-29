@@ -1,61 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-<div>prima pagina HTML</div>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:fragment="layout (mainBody)" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-
+  <base href="/" />
+  <title>Title</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
-<base href="/" />
-<title>Title</title>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link th:href="@{/css/style.css}" rel="stylesheet>/>
-</head>
-
 <body>
-
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark>
-<a class="navbar-brand" href="#">Item Store</a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
-
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav mr-auto" style ="display: flex; justify-content: space-between; width: 100%;">
-    <li class="nav-item active">
-      <a class="nav-link" href="/items">Home <span class="sr-only">(current)</span></a>
-    </li>
-    <li sec:authorize="isAuthenticated()" class="nav-item">
-      <a class="nav-link" href="/cart">Checkout </a>
-    </li>
-
-  </ul>
-
-</div>
-</nav>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Item Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto" style ="display: flex; justify-content: space-between; width: 100%;">
+        <li class="nav-item active">
+          <a class="nav-link" href="/items">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li sec:authorize="isAuthenticated()" class="nav-item">
+          <a class="nav-link" href="/cart">Checkout </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </header>
-
 <div>
-
   <main class="main-container">
     <div th:replace="${mainBody}"></div>
   </main>
-
 </div>
-
 <footer
         class="text-center text-lg-start text-white footer"
-        style="background-color: #1c2331; padding: 1rem"
+        style="background-color: #1C2331; padding: 1rem"
 >
-
   <!-- Section: Links  -->
   <section class="">
     <div class="text-center text-md-start mt-5">
@@ -67,7 +46,7 @@
           <h6 class="text-uppercase fw-bold">About Us</h6>
           <hr
                   class="mb-4 mt-0 d-inline-block mx-auto"
-                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  style="width: 60px; background-color: #7C4DFF; height: 2px"
           />
           <p>
             Here you can use rows and columns to organize your footer
@@ -76,14 +55,13 @@
           </p>
         </div>
         <!-- Grid column -->
-
         <!-- Grid column -->
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold">Contact Us</h6>
           <hr
                   class="mb-4 mt-0 d-inline-block mx-auto"
-                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  style="width: 60px; background-color: #7C4DFF; height: 2px"
           />
           <p> New York, NY 10012, US</p>
           <p> info@example.com</p>
@@ -106,13 +84,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-/body>
-</html>
-
-React
-
-Reply
-
-
 </body>
 </html>
