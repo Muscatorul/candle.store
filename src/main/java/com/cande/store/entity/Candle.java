@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Setter
 @Getter
@@ -21,4 +23,6 @@ public class Candle {
     @JoinColumn(name = "file_id",referencedColumnName = "id")
     private FileCover fileCover;
 
+    @OneToMany(mappedBy = "candle")
+    private List<ChosenCandle> chosenCandles;
 }

@@ -2,6 +2,7 @@ package com.cande.store.mapper;
 
 import com.cande.store.dto.UserDto;
 import com.cande.store.entity.Role;
+import com.cande.store.entity.ShoppingCart;
 import com.cande.store.entity.User;
 import com.cande.store.repository.RolleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,9 @@ public class UserMapper {
         else {
             user.setRoles(List.of(role.get()));
         }
-
+        ShoppingCart shoppingCart=new ShoppingCart();
+        shoppingCart.setUser(user);
+        user.setShoppingCart(shoppingCart);
 
         return user;
     }
