@@ -30,8 +30,14 @@ public class AuthController {
     }
     @PostMapping("/register/save")
     public String register(@ModelAttribute("user")UserDto userDto, BindingResult bindingResult, Model model){
-    userValidator.validate(userDto,bindingResult);
-    return "redirect:/login";
+        userValidator.validate(userDto, bindingResult);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("user", userDto);
+            return "register";
+        }
+
+        userService.saveUser(userDto);
+        return "redirect:/login";
     }
     @GetMapping("/register")
     public String viewRegister(Model model){
