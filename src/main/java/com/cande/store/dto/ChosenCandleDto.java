@@ -9,4 +9,5 @@ import lombok.Setter;
 @Builder
 public class ChosenCandleDto {
     private String quantity;
+
 }

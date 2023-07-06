@@ -2,13 +2,14 @@ package com.cande.store.controller;
 
 import com.cande.store.dto.CandleDto;
 import com.cande.store.dto.ChosenCandleDto;
+import com.cande.store.dto.ShoppingCartDto;
+import com.cande.store.dto.UserDetailsDto;
 import com.cande.store.entity.Candle;
 import com.cande.store.entity.ChosenCandle;
-import com.cande.store.service.CandleService;
-import com.cande.store.service.CandleValidator;
-import com.cande.store.service.ChosenCandleService;
+import com.cande.store.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,12 @@ public class CandleController {
     private CandleValidator candleValidator;
 	@Autowired
 	private ChosenCandleService chosenCandleService;
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CustomOrderService customOrderService;
 
     @GetMapping("/")
     public String viewTemplate(Model model) {
@@ -89,5 +96,27 @@ public class CandleController {
         return "redirect:/cart";
 
 	}
+    @GetMapping("/cart")
+    public String getCart(Model model){
+        String email=SecurityContextHolder.getContext().getAuthentication().getName();
+        ShoppingCartDto shoppingCartDto=shoppingCartService.getShoppingCartByUserEmail(email);
+        model.addAttribute("shoppingCartDto",shoppingCartDto);
+        return "cart";
+    }
+    @GetMapping("/checkout")
+    public String getCheckout(Model model){
+        String email=SecurityContextHolder.getContext().getAuthentication().getName();
+        ShoppingCartDto shoppingCartDto=shoppingCartService.getShoppingCartByUserEmail(email);
+        model.addAttribute("shoppingCartDto",shoppingCartDto);
+        UserDetailsDto userDetailsDto =userService.getUserDto(email);
+        model.addAttribute("userDetailDto",userDetailsDto);
+        return"checkout";
+    }
+    @PostMapping("/sendOrder")
+    public String sendOrder(@ModelAttribute("userDetailsDto") UserDetailsDto userDetailsDto){
+        String email=SecurityContextHolder.getContext().getAuthentication().getName();
+        customOrderService.addCustomerOrder(email,userDetailsDto.getHippingAddress());
+        return"confirmation";
 
+    }
 }
